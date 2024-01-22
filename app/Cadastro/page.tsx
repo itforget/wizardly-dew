@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import axios from "axios";
 
 export default function Cadastro() {
   const [usuarios, setUsuarios] = useState([]);
@@ -17,6 +18,17 @@ export default function Cadastro() {
       alert("Preencha todos os campos");
       return;
     }
+    axios
+      .post(
+        "https://3000-itforget-database-dv58a4uvgt4.ws-us107.gitpod.io/livros",
+        novoUsuario,
+      )
+      .then((response) => {
+        console.log("Usuário cadastrado com sucesso:", response.data);
+      })
+      .catch((error) => {
+        console.error("Erro ao cadastrar usuário:", error);
+      });
 
     setUsuarios([...usuarios, novoUsuario]);
 
