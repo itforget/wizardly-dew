@@ -4,37 +4,36 @@ import axios from "axios";
 
 export default function Cadastro() {
   const [usuarios, setUsuarios] = useState([]);
-  const [nome, setNome] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [password, setPassword] = useState("");
 
   function cadastrarUsuario() {
     const novoUsuario = {
-      nome: nome,
+      name: name,
       email: email,
-      senha: senha,
+      password: password,
     };
-    if (!nome || !email || !senha) {
-      alert("Preencha todos os campos");
+    if (!name || !email || !password) {
+      alert("Preencha todos os campos!!!");
       return;
     }
     axios
       .post(
-        "https://3000-itforget-database-dv58a4uvgt4.ws-us107.gitpod.io/livros",
+        "https://3000-itforget-dbusers-ccu3ssyjwqx.ws-us107.gitpod.io/users",
         novoUsuario,
       )
       .then((response) => {
-        console.log("Usuário cadastrado com sucesso:", response.data);
+        console.log("Resposta da API:", response.data);
       })
       .catch((error) => {
         console.error("Erro ao cadastrar usuário:", error);
       });
-
     setUsuarios([...usuarios, novoUsuario]);
 
-    setNome("");
+    setName("");
     setEmail("");
-    setSenha("");
+    setPassword("");
 
     console.log("Usuários cadastrados:", usuarios);
   }
@@ -54,15 +53,15 @@ export default function Cadastro() {
           className="bg-transparent p-2 rounded-xl mb-10"
           type="text"
           placeholder="Nome de Usuário"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <input
           className="bg-transparent p-2 rounded-xl"
           type="password"
           placeholder="Senha"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <button
           onClick={cadastrarUsuario}
